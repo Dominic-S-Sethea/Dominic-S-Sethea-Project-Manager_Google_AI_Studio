@@ -66,6 +66,22 @@ export async function login(req: Request, res: Response) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
+  // Ensure the demo user exists in the database so the audit log's foreign key
+  // (audit_logs.user_id -> users.user_id) is satisfied on a fresh database.
+  {
+    const db = getDb();
+    db.prepare(
+      "INSERT OR IGNORE INTO users (user_id, username, email, password_hash, role, status, created_at) VALUES (?, ?, ?, ?, ?, 'active', ?)"
+    ).run(
+      user.userId,
+      user.email.split("@")[0] ?? user.email,
+      user.email.toLowerCase(),
+      user.passwordHash,
+      user.role,
+      new Date().toISOString(),
+    );
+  }
+
   const token = jwt.sign(
     { user_id: user.userId, email: user.email, role: user.role },
     process.env.JWT_SECRET || "project-manager-jwt-secret",
