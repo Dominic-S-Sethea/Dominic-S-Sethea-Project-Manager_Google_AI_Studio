@@ -14,7 +14,7 @@ WORKDIR /app/backend
 COPY backend/package.json backend/package-lock.json* ./
 RUN npm ci
 COPY backend/ ./
-RUN npm run build
+RUN npm run build && mkdir -p dist/database && cp -r src/database/migrations dist/database/migrations && cp src/database/schema.sql dist/database/schema.sql
 
 FROM node:22-alpine AS runtime
 WORKDIR /app
