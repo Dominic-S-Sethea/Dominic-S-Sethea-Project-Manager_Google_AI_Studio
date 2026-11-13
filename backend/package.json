@@ -1,0 +1,47 @@
+{
+  "name": "project-manager-backend",
+  "version": "1.0.0",
+  "description": "Project Manager backend API (Express + TypeScript)",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsx src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "db:migrate": "tsx src/database/migrate.ts",
+    "db:seed": "tsx src/database/seed.ts",
+    "db:reset": "tsx src/database/reset.ts",
+    "typecheck": "tsc -p tsconfig.typecheck.json --noEmit",
+    "test": "node --test",
+    "dev:full": "tsx src/server.ts"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.3",
+    "@types/express-rate-limit": "^6.0.2",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.0.0",
+    "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "autoprefixer": "^10.6.2",
+    "jest": "^30.5.2",
+    "postcss": "^8.5.32",
+    "supertest": "^7.3.1",
+    "tailwindcss": "^3.4.11",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.5"
+  },
+  "type": "module"
+}

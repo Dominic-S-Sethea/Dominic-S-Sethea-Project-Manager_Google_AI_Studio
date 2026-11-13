@@ -1,0 +1,2 @@
+Keeps the SQLite data directory in version control. The database file itself
+is gitignored (*.db) and is created on first run.

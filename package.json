@@ -1,0 +1,20 @@
+{
+  "name": "project-manager",
+  "version": "1.0.0",
+  "description": "Multi-project management tool with AI-agent integration",
+  "private": true,
+  "scripts": {
+    "install:all": "npm ci --prefix backend && npm ci --prefix frontend",
+    "build:all": "npm run build --prefix backend && npm run build --prefix frontend",
+    "typecheck:all": "npm run typecheck --prefix backend && npm run typecheck --prefix frontend",
+    "test:all": "npm run test --prefix backend",
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "docker:build": "docker build -t project-manager:latest .",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

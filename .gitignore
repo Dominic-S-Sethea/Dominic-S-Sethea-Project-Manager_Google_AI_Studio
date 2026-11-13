@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+bower_components/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+*.key
+
+# SQLite database (local runtime seed)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.user
+
+# Logs
+logs/
+*.log
+
+# Test coverage
+coverage/
+
+# Docker
+Dockerfile.local
+docker-compose.override.yml
+
+# Runtime files
+.server-pid
+app.db*
+*.db

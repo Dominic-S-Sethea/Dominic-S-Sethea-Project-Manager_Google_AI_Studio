@@ -1,0 +1,24 @@
+# ============================
+# Project Manager — .dockerignore
+# ============================
+# NOTE: Docker matches against context-root-relative paths with Go's
+# filepath.Match (no gitignore recursion for slashless names), so patterns
+# MUST use **/ to exclude nested node_modules/dist/data at any level.
+**/node_modules/
+npm-debug.log
+**/dist/
+build/
+*.tsbuildinfo
+**/data/
+.env
+.env.local
+.env.*.local
+*.key
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.user
+*.db
+*.db-wal
+*.db-shm

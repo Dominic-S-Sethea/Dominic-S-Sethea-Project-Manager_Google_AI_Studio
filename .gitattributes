@@ -1,0 +1,4 @@
+# Keep SQL files byte-stable across checkouts.
+# Migration tests compare stored sqlite_schema.sql text, so CRLF introduced by
+# core.autocrlf on Windows would break them. Pin SQL to LF.
+*.sql text eol=lf
