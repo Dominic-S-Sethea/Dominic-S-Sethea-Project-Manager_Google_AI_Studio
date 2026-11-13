@@ -30,8 +30,8 @@ COPY --from=backend-builder /app/backend/package.json ./backend/package.json
 # The compiled database module resolves this exact source-schema path.
 COPY --from=backend-builder /app/backend/src/database/schema.sql ./backend/src/database/schema.sql
 
-# Place the frontend build alongside the backend output.
-COPY --from=frontend-builder /app/frontend/dist ./backend/dist
+# Place the frontend build in a separate directory (not over backend dist).
+COPY --from=frontend-builder /app/frontend/dist ./backend/dist/frontend
 
 ENV NODE_ENV=production PORT=4000
 ENV DB_PATH=/app/backend/data/app.db
@@ -41,4 +41,5 @@ RUN mkdir -p /app/backend/data
 EXPOSE 4000
 
 WORKDIR /app/backend
+
 CMD ["node", "dist/server.js"]
