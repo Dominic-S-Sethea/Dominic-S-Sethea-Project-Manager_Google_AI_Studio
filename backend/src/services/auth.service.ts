@@ -7,9 +7,9 @@ import { record } from "./audit.service.ts";
 
 // In-memory user store (demo seed). In production, this would be a DB-backed service.
 const DEMO_USERS = [
-  { email: "owner@projectmgr.dev", passwordHash: bcrypt.hashSync("owner123", 10), role: "owner" as const },
-  { email: "editor@projectmgr.dev", passwordHash: bcrypt.hashSync("editor123", 10), role: "editor" as const },
-  { email: "viewer@projectmgr.dev", passwordHash: bcrypt.hashSync("viewer123", 10), role: "viewer" as const },
+  { userId: "user-owner-demo", email: "owner@projectmgr.dev", passwordHash: bcrypt.hashSync("owner123", 10), role: "owner" as const },
+  { userId: "user-editor-demo", email: "editor@projectmgr.dev", passwordHash: bcrypt.hashSync("editor123", 10), role: "editor" as const },
+  { userId: "user-viewer-demo", email: "viewer@projectmgr.dev", passwordHash: bcrypt.hashSync("viewer123", 10), role: "viewer" as const },
 ];
 
 export async function login(req: Request, res: Response) {
@@ -67,23 +67,23 @@ export async function login(req: Request, res: Response) {
   }
 
   const token = jwt.sign(
-    { user_id: uuidv4(), email: user.email, role: user.role },
+    { user_id: user.userId, email: user.email, role: user.role },
     process.env.JWT_SECRET || "project-manager-jwt-secret",
     { expiresIn: "7d" }
   );
 
   record({
-    actor: { actor_type: "user", actor_id: user.email },
+    actor: { actor_type: "user", actor_id: user.userId },
     project_id: null,
     action: "auth.login",
     target_table: "users",
-    target_id: user.email,
+    target_id: user.userId,
     trigger: "api",
   });
 
   res.json({
     user: {
-      user_id: uuidv4(),
+      user_id: user.userId,
       username: user.email.split("@")[0],
       email: user.email,
       role: user.role,
